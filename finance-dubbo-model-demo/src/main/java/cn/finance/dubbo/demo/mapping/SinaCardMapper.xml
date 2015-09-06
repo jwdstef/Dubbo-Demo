@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.finance.dubbo.demo.dao.SinaCardMapper" >
+  <resultMap id="BaseResultMap" type="cn.finance.dubbo.demo.model.SinaCard" >
+    <id column="sc_id" property="scId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="is_verified" property="isVerified" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="sina_card" property="sinaCard" jdbcType="VARCHAR" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sc_id, status, is_verified, user_id, sina_card, card_id, weight, bank, bank_phone, 
+    account_name, province, city, add_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.finance.dubbo.demo.model.SinaCardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from vf_sina_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from vf_sina_card
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from vf_sina_card
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.finance.dubbo.demo.model.SinaCard" >
+    insert into vf_sina_card (sc_id, status, is_verified, 
+      user_id, sina_card, card_id, 
+      weight, bank, bank_phone, 
+      account_name, province, city, 
+      add_time)
+    values (#{scId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{isVerified,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{sinaCard,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=INTEGER}, #{bank,jdbcType=VARCHAR}, #{bankPhone,jdbcType=VARCHAR}, 
+      #{accountName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.finance.dubbo.demo.model.SinaCard" >
+    insert into vf_sina_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scId != null" >
+        sc_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isVerified != null" >
+        is_verified,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="sinaCard != null" >
+        sina_card,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="bankPhone != null" >
+        bank_phone,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scId != null" >
+        #{scId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isVerified != null" >
+        #{isVerified,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="sinaCard != null" >
+        #{sinaCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPhone != null" >
+        #{bankPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.finance.dubbo.demo.model.SinaCardExample" resultType="java.lang.Integer" >
+    select count(*) from vf_sina_card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.finance.dubbo.demo.model.SinaCard" >
+    update vf_sina_card
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isVerified != null" >
+        is_verified = #{isVerified,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="sinaCard != null" >
+        sina_card = #{sinaCard,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPhone != null" >
+        bank_phone = #{bankPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=DATE},
+      </if>
+    </set>
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.finance.dubbo.demo.model.SinaCard" >
+    update vf_sina_card
+    set status = #{status,jdbcType=VARCHAR},
+      is_verified = #{isVerified,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      sina_card = #{sinaCard,jdbcType=VARCHAR},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=INTEGER},
+      bank = #{bank,jdbcType=VARCHAR},
+      bank_phone = #{bankPhone,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=DATE}
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+</mapper>
