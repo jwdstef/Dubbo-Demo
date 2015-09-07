@@ -26,7 +26,7 @@
 				<property name="contextPath">
 					<value>/</value>
 				</property>
-				<property name="resourceBase" value="src/main/webapp/" />
+				<property name="resourceBase" value="WebContent" />
 			</bean>
 		</property>
 	</bean>
